@@ -1,0 +1,12 @@
+﻿# Local / temporary files
+.DS_Store
+Thumbs.db
+*.tmp
+*.log
+
+# Adobe CEP runtime data
+HGScripts_*/HGScripts/data/runtime/
+HGScripts_*/HGScripts/data/position_memory.json
+
+# Development-only folders
+something_dev/
