@@ -4,6 +4,14 @@
 
 HGScripts 是一个面向 Adobe 软件的脚本管理器，用来集中管理、搜索、收藏、编辑和运行 `.jsx` / `.js` 脚本。
 
+## v0.3.0 更新重点
+
+- Windows 版开始加入 Illustrator C++ 加速插件，部分颜色处理、同色选择、空对象选择等脚本可以通过 `.aip` 插件执行。
+- 面板新增 C++ / JSX 运行模式切换：自动模式会优先尝试 C++，失败后回退 JSX；也可以手动切到 JSX 模式。
+- 脚本列表的闪电标记现在会检测对应 `.aip` 是否存在；没有安装加速插件时，不会误显示闪电。
+- 正式包新增 `IllustratorPlugins_win`、`安装Illustrator加速插件.bat` 和 `C++加速插件安装说明.md`，方便 Windows 用户安装 Illustrator 加速插件。
+- Mac 版目前仍可使用 CEP 面板和 JSX 脚本，但这次暂未提供 Mac 版 C++ 加速插件。
+
 ## 支持的软件
 
 - Adobe Illustrator

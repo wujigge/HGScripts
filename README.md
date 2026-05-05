@@ -4,6 +4,14 @@
 
 HGScripts 是一个面向 Adobe 软件的 CEP 脚本管理器，用来集中管理、搜索、收藏、编辑和运行 `.jsx` / `.js` 脚本。
 
+## v0.3.0 更新重点
+
+- Windows 版开始加入 Illustrator C++ 加速插件，部分颜色处理、同色选择、空对象选择等脚本可以通过 `.aip` 插件执行。
+- 面板新增 C++ / JSX 运行模式切换：自动模式会优先尝试 C++，失败后回退 JSX；也可以手动切到 JSX 模式。
+- 脚本列表的闪电标记现在会检测对应 `.aip` 是否存在；没有安装加速插件时，不会误显示闪电。
+- 正式包新增 `IllustratorPlugins_win`、`安装Illustrator加速插件.bat` 和 `C++加速插件安装说明.md`，方便 Windows 用户安装 Illustrator 加速插件。
+- Mac 版目前仍可使用 CEP 面板和 JSX 脚本，但这次暂未提供 Mac 版 C++ 加速插件。
+
 ## 支持的软件
 
 - Adobe Illustrator
@@ -21,6 +29,7 @@ HGScripts 是一个面向 Adobe 软件的 CEP 脚本管理器，用来集中管�
 - 支持查看和编辑同名 Markdown 说明文件
 - 支持在面板内编辑脚本代码
 - 支持打开脚本所在目录和当前 Adobe 文档所在目录
+- 支持 Windows Illustrator C++ 加速插件和 JSX 回退模式
 - 支持设置界面和关于界面
 
 ## 安装方法
@@ -35,6 +44,14 @@ HGScripts 是一个面向 Adobe 软件的 CEP 脚本管理器，用来集中管�
 窗口 > 扩展 > HGScripts
 Window > Extensions > HGScripts
 ```
+
+如果你使用 Windows 版 Illustrator，并希望启用 C++ 加速插件，可以在解压后的发布包里右键以管理员身份运行：
+
+```text
+安装Illustrator加速插件.bat
+```
+
+该脚本会把 `IllustratorPlugins_win` 里的 `.aip` 插件复制到本机已安装 Illustrator 的 `Plug-ins\HGScripts` 目录。详细说明见 `C++加速插件安装说明.md`。
 
 ## 安装位置
 
