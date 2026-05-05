@@ -1,6 +1,6 @@
 # 海哥的Adobe脚本管理器 / HGScripts
 
-当前版本：`v0.2.0`
+当前版本：`v0.3.0`
 
 HGScripts 是一个面向 Adobe 软件的 CEP 脚本管理器，用来集中管理、搜索、收藏、编辑和运行 `.jsx` / `.js` 脚本。
 
@@ -25,7 +25,7 @@ HGScripts 是一个面向 Adobe 软件的 CEP 脚本管理器，用来集中管�
 
 ## 安装方法
 
-1. 解压 `HGScripts_0.2.0.zip`。
+1. 解压 `HGScripts_0.3.0.zip`。
 2. 双击运行 `安装.bat`。
 3. 如果面板菜单没有出现，再双击运行 `Enable_CEP_Debug_Mode.bat`。
 4. 重启 Illustrator / Photoshop / InDesign。
