@@ -288,7 +288,7 @@ select:focus {
 
 .settings-form {
   display: grid;
-  grid-template-columns: auto auto auto minmax(160px, 1fr) auto;
+  grid-template-columns: auto auto minmax(160px, 1fr) auto;
   gap: 8px;
   align-items: center;
   padding: 0 10px 10px;
@@ -302,8 +302,13 @@ select:focus {
   white-space: nowrap;
 }
 
-.settings-form input[type="number"] {
-  width: 52px;
+.settings-form #scanDepthInput {
+  width: 172px;
+}
+
+.settings-form .inline-hint {
+  margin: 0;
+  white-space: nowrap;
 }
 
 .create-form {

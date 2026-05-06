@@ -60,7 +60,7 @@
       return;
     }
     if (HOST_PROFILE.year === "2023" && !LEGACY_COMPAT_MODE) {
-      writeBootStatus("HGScripts v" + state.appVersion + " 已在 Illustrator 2023 启动。若下方仍是空白，请继续让 Codex 读取日志。", "warn");
+      writeBootStatus("HGScripts dev v" + state.appVersion + " 已在 Illustrator 2023 启动。若下方仍是空白，请继续让 Codex 读取日志。", "warn");
       writeBootLog("boot status kept visible for Illustrator 2023");
       return;
     }
@@ -73,17 +73,17 @@
       writeBootLog("boot status hidden after UI paint: shell=" + shellHeight + ", topbar=" + topbarHeight);
       return;
     }
-    writeBootStatus("HGScripts 已启动，但旧版 Illustrator 面板高度异常。请拖大面板或重开面板。", "warn");
+    writeBootStatus("HGScripts dev 已启动，但旧版 Illustrator 面板高度异常。请拖大面板或重开面板。", "warn");
     writeBootLog("UI paint check failed: shell=" + shellHeight + ", topbar=" + topbarHeight);
   }
 
   try {
-    writeBootStatus("正在加载 HGScripts 运行环境...");
+    writeBootStatus("正在加载 HGScripts dev 运行环境...");
     fs = require("fs");
     path = require("path");
     childProcess = require("child_process");
   } catch (errRequire) {
-    failBoot("HGScripts 无法启用 CEP Node.js 环境", errRequire);
+    failBoot("HGScripts dev 无法启用 CEP Node.js 环境", errRequire);
     return;
   }
 
@@ -91,7 +91,7 @@
     cs = new CSInterface();
     writeBootLog("CSInterface initialized");
   } catch (errCs) {
-    failBoot("HGScripts 无法初始化 CSInterface", errCs);
+    failBoot("HGScripts dev 无法初始化 CSInterface", errCs);
     return;
   }
 
@@ -276,7 +276,7 @@
   };
 
   function init() {
-    writeBootStatus("正在初始化 HGScripts...");
+    writeBootStatus("正在初始化 HGScripts dev...");
     writeBootLog("init begin");
     if (LEGACY_COMPAT_MODE && document.body) {
       document.body.className += (document.body.className ? " " : "") + "legacy-compat";
@@ -313,7 +313,7 @@
         hideBootStatusIfUiPainted();
         writeBootLog("startup refresh done");
       } catch (errRefresh) {
-        failBoot("HGScripts 启动扫描失败", errRefresh);
+        failBoot("HGScripts dev 启动扫描失败", errRefresh);
       }
     }, 0);
     startPolling();
@@ -367,7 +367,7 @@
     } catch (err) {
       version = "0.3.1";
     }
-    document.title = "\\u6D77\\u54E5\\u7684Adobe\\u811A\\u672C\\u7BA1\\u7406\\u5668 v" + version;
+    document.title = "\u6D77\u54E5\u7684Adobe\u811A\u672C\u7BA1\u7406 dev v" + version;
     if (el.appVersion) {
       el.appVersion.textContent = "v" + version;
     }
@@ -1058,6 +1058,7 @@
   }
 
   function renderSettings() {
+    settings.scanDepth = normalizeScanDepth(settings.scanDepth, DEFAULT_SETTINGS.scanDepth);
     el.scanDepthInput.value = String(settings.scanDepth);
     el.ignoredDirsInput.value = (settings.ignoredDirs || []).join(",");
     el.languageSelect.value = normalizeLanguageMode(settings.languageMode);
@@ -1065,7 +1066,7 @@
   }
 
   function saveSettingsFromForm() {
-    settings.scanDepth = clampNumber(parseInt(el.scanDepthInput.value, 10), 0, 10, 5);
+    settings.scanDepth = normalizeScanDepth(el.scanDepthInput.value, DEFAULT_SETTINGS.scanDepth);
     settings.ignoredDirs = parseIgnoredDirs(el.ignoredDirsInput.value);
     saveSettings();
     refresh("设置已保存");
@@ -3135,12 +3136,31 @@
   }
 
   function isDevExtensionRoot() {
-    return false;
+    return /(^|[\\/])HGScripts_dev$/i.test(EXTENSION_ROOT || "");
   }
 
   function getDevCppPluginRoots() {
-    return [];
+    if (!isDevExtensionRoot()) {
+      return [];
+    }
+    var rootsByYear = {
+      "2023": "X:\\luhaijustwork\\BaiduSyncdisk\\Programmer\\AdobeDev\\sourceofofficial\\AI_2023_SDK_Win\\Adobe Illustrator 2023 SDK\\samplecode\\output\\win\\debug",
+      "2024": "X:\\luhaijustwork\\BaiduSyncdisk\\Programmer\\AdobeDev\\sourceofofficial\\AI_2024_SDK_Win\\Adobe Illustrator 2024 SDK\\samplecode\\output\\win\\debug",
+      "2025": "X:\\luhaijustwork\\BaiduSyncdisk\\Programmer\\AdobeDev\\sourceofofficial\\AI_2025_SDK_Win\\Adobe Illustrator 2025 SDK\\samplecode\\output\\win\\debug",
+      "2026": "X:\\luhaijustwork\\BaiduSyncdisk\\Programmer\\AdobeDev\\sourceofofficial\\AI_2026_SDK_Win\\Adobe Illustrator 2026 SDK\\samplecode\\output\\win\\debug"
+    };
+    if (HOST_PROFILE.year && rootsByYear[HOST_PROFILE.year]) {
+      return [rootsByYear[HOST_PROFILE.year]];
+    }
+    var roots = [];
+    for (var year in rootsByYear) {
+      if (Object.prototype.hasOwnProperty.call(rootsByYear, year)) {
+        roots.push(rootsByYear[year]);
+      }
+    }
+    return roots;
   }
+
   function isCppPluginInstalled(pluginName) {
     pluginName = normalizeCppPluginName(pluginName);
     if (!pluginName || typeof process === "undefined" || process.platform !== "win32") {
@@ -3250,7 +3270,7 @@
         mergeSettings(next, saved);
       }
     } catch (err) {}
-    next.scanDepth = clampNumber(parseInt(next.scanDepth, 10), 0, 10, DEFAULT_SETTINGS.scanDepth);
+    next.scanDepth = normalizeScanDepth(next.scanDepth, DEFAULT_SETTINGS.scanDepth);
     next.ignoredDirs = parseIgnoredDirs((next.ignoredDirs || DEFAULT_SETTINGS.ignoredDirs).join(","));
     next.languageMode = normalizeLanguageMode(next.languageMode);
     next.storage = next.storage || {};
@@ -3525,6 +3545,10 @@
       return fallback;
     }
     return Math.max(min, Math.min(max, value));
+  }
+
+  function normalizeScanDepth(value, fallback) {
+    return clampNumber(parseInt(value, 10), 0, 10, fallback);
   }
 
   function openExternal(filePath) {
@@ -3808,9 +3832,7 @@
     try {
       init();
     } catch (errInit) {
-      failBoot("HGScripts 初始化失败", errInit);
+      failBoot("HGScripts dev 初始化失败", errInit);
     }
   }, 0);
 })();
-
-
