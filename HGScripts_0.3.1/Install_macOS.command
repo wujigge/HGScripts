@@ -1,4 +1,4 @@
-#!/bin/bash
+﻿#!/bin/bash
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -7,7 +7,7 @@ TARGET_DIR="$HOME/Library/Application Support/Adobe/CEP/extensions/HGScripts"
 
 echo
 echo "=========================================="
-echo " HGScripts v0.3.0 macOS Installer"
+echo " HGScripts v0.3.1 macOS Installer"
 echo "=========================================="
 echo
 

@@ -1,24 +1,24 @@
 # 海哥的Adobe脚本管理器 / HGScripts
 
-当前版本：`v0.3.0`
+当前版本：`v0.3.1`
 
-HGScripts 是一个面向 Adobe 软件的 CEP 脚本管理器，用来集中管理、搜索、收藏、编辑和运行 `.jsx` / `.js` 脚本。
+HGScripts 是一个面向 Adobe Illustrator 的 CEP 脚本管理器，用来集中管理、搜索、收藏、编辑和运行 `.jsx` / `.js` 脚本。
 
-## v0.3.0 更新重点
+## v0.3.1 更新重点
 
-- Windows 版开始加入 Illustrator C++ 加速插件，部分颜色处理、同色选择、空对象选择等脚本可以通过 `.aip` 插件执行。
-- 面板新增 C++ / JSX 运行模式切换：自动模式会优先尝试 C++，失败后回退 JSX；也可以手动切到 JSX 模式。
-- 脚本列表的闪电标记现在会检测对应 `.aip` 是否存在；没有安装加速插件时，不会误显示闪电。
-- 正式包新增 `IllustratorPlugins_win`、`安装Illustrator加速插件.bat` 和 `C++加速插件安装说明.md`，方便 Windows 用户安装 Illustrator 加速插件。
-- Mac 版目前仍可使用 CEP 面板和 JSX 脚本，但这次暂未提供 Mac 版 C++ 加速插件。
+- 兼容 Illustrator 2023、2024、2025、2026 的面板显示；旧版 Illustrator 使用 legacy 入口，避免空白面板。
+- Windows Illustrator C++ 加速插件按 2023 / 2024 / 2025 / 2026 分版本打包，避免不同 SDK 编译产物混用。
+- 面板里的 C++ 闪电标识只判断正式安装位置，未安装 `.aip` 时不会误显示加速标记。
+- 旧版 CEP 下 SVG 图标改为更稳定的内联显示方案，减少闪烁和加载差异。
+- 正式包清理了开发机路径、运行记录、收藏和面板尺寸等个人状态。
+- Windows 安装器默认勾选开启 CEP 支持、安装 C++ 加速插件、创建桌面安装帮助快捷方式。
 
 ## 支持的软件
 
-- Adobe Illustrator
-- Adobe Photoshop
-- Adobe InDesign
+- 主线支持：Adobe Illustrator
+- 基础支持：Adobe Photoshop、Adobe InDesign
 
-当前 Illustrator 是主线；Photoshop / InDesign 已加入基础支持，可以打开面板、按宿主隔离脚本目录，并运行对应测试脚本。后续会逐步增加 Photoshop / InDesign 的实用脚本。
+当前功能和内置脚本以 Illustrator 为主。Photoshop / InDesign 可以打开面板、隔离脚本目录并运行对应测试脚本，但实用脚本和 C++ 加速目前主要服务 Illustrator。
 
 ## 主要功能
 
@@ -32,17 +32,25 @@ HGScripts 是一个面向 Adobe 软件的 CEP 脚本管理器，用来集中管�
 - 支持 Windows Illustrator C++ 加速插件和 JSX 回退模式
 - 支持设置界面和关于界面
 
-## 安装方法
+## Windows 安装方法
 
-1. 解压 `HGScripts_0.3.0.zip`。
-2. 双击运行 `安装.bat`。
-3. 如果面板菜单没有出现，再双击运行 `Enable_CEP_Debug_Mode.bat`。
-4. 重启 Illustrator / Photoshop / InDesign。
-5. 在对应 Adobe 软件中打开：
+推荐下载发布包里的 Windows 安装器：
 
 ```text
-窗口 > 扩展 > HGScripts
-Window > Extensions > HGScripts
+安装-海哥的Adobe脚本管理器v0.3.1.exe
+```
+
+如果使用手动安装包：
+
+1. 解压 `HGScripts_0.3.1_手动安装包.zip`。
+2. 双击运行 `安装.bat`。
+3. 如果面板菜单没有出现，再双击运行 `Enable_CEP_Debug_Mode.bat`。
+4. 重新打开 Illustrator。
+5. 在 Illustrator 中打开：
+
+```text
+窗口 > 扩展 > 海哥的Adobe脚本管理器
+Window > Extensions > 海哥的Adobe脚本管理器
 ```
 
 如果你使用 Windows 版 Illustrator，并希望启用 C++ 加速插件，可以在解压后的发布包里右键以管理员身份运行：
@@ -51,7 +59,7 @@ Window > Extensions > HGScripts
 安装Illustrator加速插件.bat
 ```
 
-该脚本会把 `IllustratorPlugins_win` 里的 `.aip` 插件复制到本机已安装 Illustrator 的 `Plug-ins\HGScripts` 目录。详细说明见 `C++加速插件安装说明.md`。
+该脚本会按 Illustrator 年份复制 `IllustratorPlugins_win` 里的对应 `.aip` 插件。详细说明见 `C++加速插件安装说明.md`。
 
 ## 安装位置
 
@@ -87,11 +95,11 @@ hgscripts.indesign.*
 
 ## 更新方法
 
-更新时，解压新版发布包并重新运行 `安装.bat` 即可。建议更新前先关闭 Illustrator / Photoshop / InDesign。
+更新时，关闭 Illustrator，运行新版安装器，或解压新版手动安装包并重新运行 `安装.bat` 即可。
 
 ## 开源和参考
 
-本插件免费开源发布。
+本插件免费开源发布。HGScripts 面板源码开放；Windows Illustrator C++ 加速插件以编译后的 `.aip` 形式随包发布。
 
 参考项目：
 
@@ -105,4 +113,4 @@ GitHub: https://github.com/wujigge/HGScripts
 - Email: haigeplay3d@gmail.com
 - WeChat: haigeplay3d
 
-欢迎反馈 bug、提出功能建议，也接受 Illustrator / Photoshop / InDesign 脚本定制。
+欢迎反馈 bug、提出功能建议，也接受 Illustrator 脚本定制。
