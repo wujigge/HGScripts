@@ -1,7 +1,7 @@
 # HGScripts 安装帮助
 
 版本：v0.3.3  
-更新日期：2026-05-06
+更新日期：2026-05-29
 
 ## Windows 推荐安装
 
@@ -21,95 +21,40 @@ Windows 用户优先使用同目录里的 EXE 安装包：
 
 Illustrator 2021 可以使用 HGScripts CEP 面板和普通 JSX 脚本；C++ 加速插件目前只提供 Illustrator 2023、2024、2025、2026 的 `.aip`。Illustrator 2020 已停止作为兼容目标。
 
-## Windows 手动安装
+## Windows 发布包说明
 
-如果不使用 EXE，可以手动安装：
+当前正式版不再提供单独的手动安装包 zip。普通用户只需要使用 EXE 安装器。
 
-1. 解压 `HGScripts_0.3.3_手动安装包.zip`。
-2. 双击 `安装.bat`。
-3. 看到 `Installation completed.` 表示面板文件已复制完成。
-4. 重新打开 Illustrator。
-5. 在菜单中打开 `窗口 > 扩展 > 海哥的Adobe脚本管理器`。
-
-如果菜单里没有出现“海哥的Adobe脚本管理器”，再双击运行：
-
-```text
-Enable_CEP_Debug_Mode.bat
-```
-
-运行后完全关闭并重新打开 Illustrator。
+如果你需要查看源码、文档或 `.aip` 成品，请使用 GitHub 导出目录；它不是面向普通用户的一键安装包。GitHub 导出目录中，CEP 面板本体位于 `cep/HGScripts`，Windows Illustrator `.aip` 成品位于 `plugins/illustrator-win`。
 
 ## 安装 Illustrator C++ 加速插件
 
-如果你主要用 Illustrator 2023 或更新版本，建议安装加速插件。v0.3.3 已按 Illustrator 2023、2024、2025、2026 分版本放置 `.aip`。Illustrator 2021 不安装 HGScripts `.aip`，会使用普通 JSX 方式运行。
-
-1. 关闭 Illustrator。
-2. 右键 `安装Illustrator加速插件.bat`。
-3. 选择“以管理员身份运行”。
-4. 看到 `Installation completed.` 后，重新打开 Illustrator。
+如果你主要用 Illustrator 2023 或更新版本，建议在安装器中保留 C++ 加速插件选项。v0.3.3 已按 Illustrator 2023、2024、2025、2026 分版本打包 `.aip`。Illustrator 2021 不安装 HGScripts `.aip`，会使用普通 JSX 方式运行。
 
 没有安装加速插件时，HGScripts 面板仍然可以使用，带加速标记的脚本会回退到普通 JSX 方式运行。
-
-## 手动安装面板
-
-如果 `安装.bat` 不能运行，可以把解压后的 `HGScripts` 文件夹复制到：
-
-```text
-%APPDATA%\Adobe\CEP\extensions
-```
-
-复制完成后，`HGScripts` 文件夹内应能直接看到：
-
-```text
-CSXS
-assets
-scripts
-user_scripts
-index.html
-```
-
-## 手动安装 Illustrator 加速插件
-
-按 Illustrator 年份复制对应目录里的 `.aip`：
-
-```text
-IllustratorPlugins_win\2023
-IllustratorPlugins_win\2024
-IllustratorPlugins_win\2025
-IllustratorPlugins_win\2026
-```
-
-复制到对应 Illustrator 的插件目录，例如：
-
-```text
-C:\Program Files\Adobe\Adobe Illustrator 2026\Plug-ins\HGScripts
-C:\Program Files\Adobe\Adobe Illustrator 2025\Plug-ins\HGScripts
-```
-
-如果没有 `HGScripts` 文件夹，可以自己新建。复制后请重启 Illustrator。
 
 ## 常见问题
 
 ### 面板菜单没有出现
 
-1. 先运行 `Enable_CEP_Debug_Mode.bat`。
+1. 重新运行 EXE 安装器，并确认勾选了“开启 Adobe CEP 支持”。
 2. 完全关闭并重新打开 Illustrator。
 3. 确认 `%APPDATA%\Adobe\CEP\extensions\HGScripts` 内能直接看到 `CSXS`、`assets`、`scripts`、`user_scripts`。
 
 ### 加速脚本没有变快
 
-1. 确认运行过 `安装Illustrator加速插件.bat` 或在安装器中勾选了 C++ 加速插件。
+1. 确认安装器中勾选了 C++ 加速插件。
 2. 确认安装后重启了 Illustrator。
 3. 确认 HGScripts 面板顶部运行模式不是 `JSX`。
 
 ### 安装加速插件失败
 
-请右键 `安装Illustrator加速插件.bat`，选择“以管理员身份运行”。如果仍失败，建议使用 EXE 安装包。
+请右键 EXE 安装器，选择“以管理员身份运行”，并确认安装器中勾选了 C++ 加速插件。
 
 ## Mac 说明
 
-Mac 相关安装文件目前未实机验证。Mac 用户请看：
+Mac 目前只提供手动复制说明，不提供 `.command` 自动安装脚本。Mac 用户请看：
 
 ```text
-Mac安装说明_未测试.md
+海哥的Adobe脚本管理器v0.3.3-macOS手动安装说明.txt
 ```

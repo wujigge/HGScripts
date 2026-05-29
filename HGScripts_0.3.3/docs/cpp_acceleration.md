@@ -3,7 +3,7 @@
 这个文件夹里放的是 HGScripts 给 Illustrator 用的加速插件。
 
 ```text
-IllustratorPlugins_win
+plugins/illustrator-win
 ├─ 2023
 ├─ 2024
 ├─ 2025
@@ -24,7 +24,7 @@ Illustrator 2021 不包含 HGScripts `.aip` 加速插件；2021 只使用 CEP �
 ## 推荐安装方法
 
 1. 关闭 Illustrator。
-2. 右键 `安装Illustrator加速插件.bat`。
+2. 右键 `tools/windows/install_illustrator_plugins.bat`。
 3. 选择“以管理员身份运行”。
 4. 等待出现 `Installation completed.`。
 5. 重新打开 Illustrator。

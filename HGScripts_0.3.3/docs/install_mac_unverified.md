@@ -1,73 +1,23 @@
 # Mac 安装说明（未测试）
 
 版本：v0.3.3
-更新日期：2026-05-06
+更新日期：2026-05-29
 
 ## 重要说明
 
 我目前没有 Mac 设备，所以这套安装方法还没有实机验证。
 
-HGScripts 是 CEP 面板，理论上可以在 macOS 的 Illustrator 中手动安装。Photoshop / InDesign 目前只是基础支持，不是这版的主线测试目标。不同 Adobe 版本、macOS 权限和 CEP 环境可能会有差异。
+HGScripts 是 CEP 面板，理论上可以在 macOS 的 Illustrator 中手动安装。当前正式发布不再提供手动安装包 zip，也不包含 `.command` 自动安装脚本。
 
-如果你愿意测试，欢迎把结果反馈给我，我后续会整理成正式 Mac 安装方案。
+macOS 只支持 CEP 面板和普通 JSX 脚本。Windows Illustrator C++ 加速插件（`.aip`）只适用于 Windows，不支持 macOS。
 
-## 支持的软件
+## 准备文件
 
-理论上支持：
+请从 GitHub 导出目录或源码发布目录中找到 `cep/HGScripts` 文件夹。
 
-- Adobe Illustrator
-- Adobe Photoshop
-- Adobe InDesign
+这个 `HGScripts` 文件夹就是 CEP 面板本体，里面应能看到 `CSXS`、`assets`、`scripts`、`user_scripts` 和 `index.html`。
 
-当前 Illustrator 是主线；Photoshop / InDesign 仅为基础支持。
-
-## 方法一：一键安装（未测试）
-
-解压后，先尝试双击运行：
-
-```text
-Install_macOS.command
-```
-
-如果面板菜单没有出现，再双击运行：
-
-```text
-Enable_CEP_Debug_Mode_macOS.command
-```
-
-然后完全退出并重新打开 Illustrator。
-
-### 如果 `.command` 无法双击运行
-
-macOS 可能会因为权限或安全设置阻止 `.command` 文件运行。
-
-可以打开“终端”，进入解压后的 `HGScripts_0.3.3_手动安装包` 文件夹，执行：
-
-```bash
-chmod +x Install_macOS.command
-chmod +x Enable_CEP_Debug_Mode_macOS.command
-```
-
-然后再双击运行，或在终端中执行：
-
-```bash
-./Install_macOS.command
-./Enable_CEP_Debug_Mode_macOS.command
-```
-
-## 方法二：手动安装
-
-### 1. 解压插件包
-
-下载并解压 `HGScripts_0.3.3_手动安装包.zip`。
-
-找到解压后的插件文件夹：
-
-```text
-HGScripts_0.3.3_手动安装包/HGScripts
-```
-
-### 2. 打开 CEP 扩展目录
+## 复制 HGScripts 面板
 
 打开 Finder，按：
 
@@ -83,35 +33,25 @@ Command + Shift + G
 
 如果没有 `CEP` 或 `extensions` 文件夹，可以手动新建。
 
-### 3. 复制插件
-
-把解压后的 `HGScripts` 文件夹复制到：
+把 `cep` 目录里的 `HGScripts` 文件夹复制到：
 
 ```text
 ~/Library/Application Support/Adobe/CEP/extensions
 ```
 
-复制完成后，`HGScripts` 文件夹内应该能直接看到：
+最终应类似：
 
 ```text
-CSXS
-assets
-scripts
-user_scripts
-index.html
+~/Library/Application Support/Adobe/CEP/extensions/HGScripts/CSXS/manifest.xml
 ```
 
 ## 开启 CEP 未签名扩展
 
 因为这是未签名 CEP 扩展，需要开启 `PlayerDebugMode`。
 
-打开“终端”，执行下面命令：
+打开“终端”，执行：
 
 ```bash
-defaults write com.adobe.CSXS.7 PlayerDebugMode 1
-defaults write com.adobe.CSXS.8 PlayerDebugMode 1
-defaults write com.adobe.CSXS.9 PlayerDebugMode 1
-defaults write com.adobe.CSXS.10 PlayerDebugMode 1
 defaults write com.adobe.CSXS.11 PlayerDebugMode 1
 defaults write com.adobe.CSXS.12 PlayerDebugMode 1
 defaults write com.adobe.CSXS.13 PlayerDebugMode 1
@@ -148,6 +88,19 @@ HGScripts/user_scripts/indesign
 ```
 
 你自己的 `.jsx` 或 `.js` 脚本也可以放到对应目录，然后在面板里点击刷新。
+
+## 关于 C++ 加速插件
+
+GitHub 导出目录中的 `plugins/illustrator-win` 目录只适用于 Windows。
+
+macOS 用户请忽略：
+
+```text
+plugins/illustrator-win
+tools/windows/install_illustrator_plugins.bat
+```
+
+在 macOS 上请使用普通 JSX 模式。
 
 ## 如果菜单没有出现
 
