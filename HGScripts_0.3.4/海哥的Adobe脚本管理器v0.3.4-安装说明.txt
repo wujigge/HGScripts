@@ -1,0 +1,49 @@
+海哥的Adobe脚本管理器 v0.3.4 Windows 安装说明
+
+推荐安装方式
+
+请优先运行：
+
+安装-海哥的Adobe脚本管理器v0.3.4.exe
+
+安装器会复制 HGScripts 面板、开启 Adobe CEP 支持，并可安装 Windows Illustrator C++ 加速插件。
+
+本正式包暂不支持 macOS。macOS 版本暂不提供安装包、手动安装说明或技术支持。
+
+
+安装步骤
+
+1. 关闭 Illustrator。
+2. 双击运行 安装-海哥的Adobe脚本管理器v0.3.4.exe。
+3. 按安装器提示完成安装。
+4. 重新打开 Illustrator。
+5. 在菜单中打开：窗口 > 扩展 > 海哥的Adobe脚本管理器
+
+英文界面一般是：
+
+Window > Extensions > 海哥的Adobe脚本管理器
+
+
+关于 C++ 加速插件
+
+安装器可安装 Windows Illustrator C++ 加速插件。
+
+支持 Illustrator 2023、2024、2025、2026。
+Illustrator 2021 只使用 CEP 面板和普通 JSX 脚本，不安装 HGScripts .aip。
+macOS 暂不支持；Windows .aip 加速插件也不能用于 macOS。
+
+
+如果菜单没有出现
+
+1. 确认安装时勾选了“开启 Adobe CEP 支持”。
+2. 完全退出并重新打开 Illustrator。
+3. 确认安装目录中存在 HGScripts 面板文件。
+
+
+重要说明
+
+- 当前正式发布不再提供单独的手动安装包 zip。
+- 当前正式发布只提供 1 个 exe 安装器和 1 个 txt 安装说明。
+- macOS 暂不支持。
+- 如需查看公开源码或手动复制文件，请使用 GitHub 导出目录。
+- 本发布不包含 C++ 源码、Adobe SDK、Visual Studio 工程、调试符号、runtime、memory、本机路径或个人运行数据。
